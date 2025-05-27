@@ -22,7 +22,7 @@ const io = new Server(server, {
 app.set('io', io);
 
 const corsOptions = {
-  origin: ['https://bnana-clicker.vercel.app/', 'http://localhost:5173'],
+  origin: ['https://bnana-clicker.vercel.app', 'http://localhost:5173'],
   methods: 'GET,PUT,PATCH,DELETE,POST,HEAD,OPTIONS',
   credentials: true,
 };
