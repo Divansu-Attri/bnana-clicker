@@ -1,35 +1,36 @@
-require('dotenv').config(); // Load environment variables
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const http = require('http'); // Required for Socket.io
-const { Server } = require('socket.io'); // Socket.io server
-const jwt = require('jsonwebtoken'); // For Socket.io authentication
-const User = require('./models/User'); // User model
+const http = require('http');
+const { Server } = require('socket.io');
+const jwt = require('jsonwebtoken');
+const User = require('./models/User');
 
 const app = express();
-const server = http.createServer(app); // Create HTTP server for Express and Socket.io
+const server = http.createServer(app);
 
 // Socket.io setup
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000', // Allow your React app to connect
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST','PUT', 'DELETE', 'PATCH'],
     credentials: true,
   },
 });
 
-// Make io accessible to Express routes (e.g., for emitting events from REST endpoints)
 app.set('io', io);
 
-const allowedOrigins = ['"https://bnana-clicker.vercel.app/", http://localhost:5173'];
-// Middleware
-app.use(cors({
-  origin: allowedOrigins,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+const corsOptions = {
+  origin: ['https://bnana-clicker.vercel.app/', 'http://localhost:5173'],
+  methods: 'GET,PUT,PATCH,DELETE,POST,HEAD,OPTIONS',
   credentials: true,
-}));
-app.use(express.json()); // For parsing application/json
+};
+
+
+// Middleware
+app.use(cors(corsOptions));
+app.use(express.json());
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
@@ -118,6 +119,5 @@ io.on('connection', async (socket) => {
   });
 });
 
-// Start the server
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`http://localhost:${PORT}`));
