@@ -22,9 +22,10 @@ const io = new Server(server, {
 // Make io accessible to Express routes (e.g., for emitting events from REST endpoints)
 app.set('io', io);
 
+const allowedOrigins = ['"https://bnana-clicker.vercel.app/", http://localhost:5173'];
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: allowedOrigins,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   credentials: true,
 }));
