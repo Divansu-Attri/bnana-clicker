@@ -48,7 +48,7 @@ export const AuthPage = () => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
+                required 
               />
             </Form.Group>
             <Button variant="primary" type="submit" className="w-100 mb-3">
