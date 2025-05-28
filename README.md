@@ -126,5 +126,5 @@ banana-dashboard/
 
 For queries or revisions, feel free to reach out!  
 **Email:** divansupandat@gmail.com  
-**LinkedIn:** [Your LinkedIn Profile](https://www.linkedin.com/in/divansu-attri-580538304/)
+**LinkedIn:** [LinkedIn Profile](https://www.linkedin.com/in/divansu-attri-580538304/)
 
